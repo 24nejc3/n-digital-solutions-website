@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Content — N Digital Studio</title>
+<meta name="description" content="Short-form video and social content that earns attention, builds trust, and brings buyers to your door.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060a12; --bg-2:#0a111d;
+    --surface:rgba(120,170,255,0.05); --surface-2:rgba(120,170,255,0.085);
+    --border:rgba(140,185,255,0.12); --border-2:rgba(140,185,255,0.20);
+    --text:#eaf1fc; --muted:#93a6c6; --faint:rgba(234,241,252,0.55);
+    --accent:#2f7bff; --accent-2:#38cfee; --accent-3:#8b7bff; --accent-ink:#04101f;
+    --glow-1:rgba(47,123,255,0.6); --glow-2:rgba(56,200,238,0.45); --halo:rgba(47,123,255,0.18);
+    --good:#34d399; --like:#ff5d8f;
+    --font-display:'Space Grotesk',serif; --font-body:'Hanken Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  @keyframes auroraDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(7%,5%) scale(1.16)}}
+  @keyframes spinSlow{to{transform:rotate(360deg)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes heartPop{0%,100%{transform:scale(1)}30%{transform:scale(1.3)}60%{transform:scale(.92)}}
+  @keyframes countUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes ticker{0%{transform:translateY(0)}25%{transform:translateY(-100%)}50%{transform:translateY(-200%)}75%{transform:translateY(-300%)}100%{transform:translateY(-400%)}}
+  @keyframes waveform{0%,100%{transform:scaleY(.5)}50%{transform:scaleY(1)}}
+  @keyframes scrollFeed{0%,15%{transform:translateY(0)}35%,55%{transform:translateY(-110px)}75%,95%{transform:translateY(-220px)}100%{transform:translateY(0)}}
+  .rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .display{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+  .bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bg-aurora .a{position:absolute;top:-18%;left:-12%;width:62vw;height:62vw;border-radius:50%;background:radial-gradient(circle,var(--glow-1),transparent 62%);filter:blur(40px);opacity:.7;animation:auroraDrift 24s ease-in-out infinite alternate}
+  .bg-aurora .b{position:absolute;bottom:-22%;right:-14%;width:58vw;height:58vw;border-radius:50%;background:radial-gradient(circle,var(--glow-2),transparent 64%);filter:blur(46px);opacity:.5;animation:auroraDrift 30s ease-in-out infinite alternate-reverse}
+  .bg-aurora .c{position:absolute;inset:0;background:radial-gradient(circle at 60% 30%,transparent 30%,var(--bg) 92%)}
+  header{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);background:color-mix(in oklab,var(--bg) 70%,transparent);border-bottom:1px solid var(--border)}
+  nav{max-width:1200px;margin:0 auto;padding:13px clamp(16px,4vw,40px);display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(140deg,var(--accent),var(--accent-3));color:var(--accent-ink);font-family:var(--font-display);font-weight:700;font-size:18px;box-shadow:0 6px 18px -6px var(--glow-1)}
+  .brand-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s ease}
+  .nav-links a:hover{color:var(--text)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border-2);font-size:14px;font-weight:600;transition:transform .2s,border-color .2s}
+  .btn-ghost:hover{transform:translateY(-1px);border-color:var(--accent)}
+  .btn-primary{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:9px;padding:15px 23px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent-3));color:var(--accent-ink);font-weight:700;font-size:15px;box-shadow:0 14px 36px -12px var(--glow-1),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .25s,box-shadow .3s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 48px -12px var(--glow-1)}
+  .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:15px 20px;border-radius:13px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-weight:600;font-size:15px;transition:transform .25s,background .25s,border-color .25s}
+  .btn-secondary:hover{transform:translateY(-2px);background:var(--surface-2);border-color:var(--border-2)}
+  main{position:relative;z-index:5}
+  section{max-width:1200px;margin:0 auto}
+  /* HERO */
+  .hero{padding:clamp(36px,7vw,86px) clamp(16px,4vw,40px) clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(26px,4vw,56px);align-items:center}
+  .hero-text{flex:1 1 360px;min-width:290px}
+  .hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(33px,5.3vw,62px);line-height:1.05;letter-spacing:-.02em;margin:18px 0 0;max-width:18ch}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{margin:20px 0 0;max-width:54ch;font-size:clamp(15px,1.5vw,18px);line-height:1.62;color:var(--muted)}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+  .pill{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 10px 1px rgba(52,211,153,.7);animation:blink 2.4s ease-in-out infinite}
+  /* HERO VISUAL — phone with short-form video */
+  .hero-visual{flex:1 1 380px;min-width:290px;display:flex;justify-content:center}
+  .phone-frame{position:relative;width:100%;max-width:340px;aspect-ratio:9/17.5}
+  .phone-conic{position:absolute;inset:-8%;border-radius:60px;background:conic-gradient(from 0deg,var(--glow-1),transparent 28%,var(--glow-2) 58%,transparent 84%,var(--glow-1));filter:blur(54px);opacity:.5;animation:spinSlow 28s linear infinite}
+  .phone{position:absolute;inset:0;border-radius:40px;background:linear-gradient(165deg,#0d1726,#070c16);border:1.5px solid var(--border-2);overflow:hidden;box-shadow:0 50px 100px -38px rgba(0,0,0,.92),inset 0 1px 0 rgba(255,255,255,.06)}
+  .notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:78px;height:18px;border-radius:14px;background:#020610;z-index:5}
+  .reel{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 25%,color-mix(in oklab,var(--accent) 38%,#0a1124),#040810 75%);overflow:hidden}
+  .reel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.7) 100%)}
+  .reel-subj{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:160px;height:160px;border-radius:50%;background:radial-gradient(circle at 40% 35%,var(--accent-2),var(--accent) 55%,var(--accent-3) 100%);filter:blur(.5px);box-shadow:0 0 60px -10px var(--glow-1)}
+  .reel-caption{position:absolute;left:14px;right:60px;bottom:74px;z-index:3;font-family:var(--font-display);font-weight:600;font-size:15px;line-height:1.25;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  .reel-handle{position:absolute;left:14px;right:60px;bottom:50px;z-index:3;font-size:11px;color:rgba(255,255,255,.78);text-shadow:0 1px 6px rgba(0,0,0,.6)}
+  .reel-side{position:absolute;right:10px;bottom:60px;z-index:4;display:flex;flex-direction:column;gap:14px;align-items:center}
+  .rs-btn{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);display:grid;place-items:center;color:#fff}
+  .rs-num{font-size:10px;font-weight:700;color:#fff;margin-top:-9px;text-shadow:0 1px 4px rgba(0,0,0,.7)}
+  .rs-heart{animation:heartPop 1.8s ease-in-out infinite}
+  /* live count ticker */
+  .ticker-wrap{position:absolute;left:14px;top:38px;z-index:4;display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);color:#fff;font-size:11px;font-weight:600}
+  .ticker-wrap .live{width:6px;height:6px;border-radius:50%;background:#ff4d4f;box-shadow:0 0 8px #ff4d4f;animation:blink 1.2s ease-in-out infinite}
+  .ticker-num{display:inline-block;height:14px;overflow:hidden;line-height:14px;font-variant-numeric:tabular-nums}
+  .ticker-num span{display:block}
+  .ticker-num .roll{animation:ticker 6s steps(4,end) infinite}
+  /* audio waveform */
+  .wave{position:absolute;left:14px;bottom:18px;display:flex;align-items:flex-end;gap:3px;height:22px;z-index:4}
+  .wave span{width:3px;background:#fff;border-radius:3px;transform-origin:bottom;animation:waveform 1s ease-in-out infinite}
+  .wave span:nth-child(1){height:60%;animation-delay:0s}
+  .wave span:nth-child(2){height:100%;animation-delay:.12s}
+  .wave span:nth-child(3){height:40%;animation-delay:.24s}
+  .wave span:nth-child(4){height:80%;animation-delay:.36s}
+  .wave span:nth-child(5){height:55%;animation-delay:.48s}
+  .wave span:nth-child(6){height:90%;animation-delay:.6s}
+  .wave span:nth-child(7){height:35%;animation-delay:.72s}
+  /* SECTION HEADS */
+  .sec-head{max-width:680px}
+  .sec-head h2{margin:14px 0 0;font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.6vw,42px);line-height:1.1;letter-spacing:-.02em}
+  .sec-head p{margin:18px 0 0;max-width:60ch;color:var(--muted);font-size:clamp(15px,1.4vw,17px);line-height:1.6}
+  /* STATS */
+  .stats{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:36px}
+  .stat{padding:26px;border-radius:18px;background:var(--surface);border:1px solid var(--border);transition:transform .3s,border-color .3s,background .3s}
+  .stat:hover{transform:translateY(-4px);border-color:var(--border-2);background:var(--surface-2)}
+  .stat .n{font-family:var(--font-display);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1;letter-spacing:-.02em;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .stat .src{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .stat .src a{color:var(--faint);border-bottom:1px dotted var(--border-2);transition:color .2s}
+  .stat .src a:hover{color:var(--accent)}
+  /* FORMATS */
+  .formats{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .formats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:36px}
+  .fmt{padding:22px;border-radius:16px;background:var(--surface);border:1px solid var(--border);transition:transform .3s,border-color .3s,background .3s;display:flex;flex-direction:column;gap:9px}
+  .fmt:hover{transform:translateY(-4px);border-color:var(--accent);background:var(--surface-2)}
+  .fmt .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:color-mix(in oklab,var(--accent) 14%,transparent);border:1px solid var(--border)}
+  .fmt h3{margin:0;font-family:var(--font-display);font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .fmt p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+  /* BENEFITS */
+  .benefits{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .benefit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:36px}
+  .benefit{position:relative;overflow:hidden;padding:26px;border-radius:18px;background:var(--surface);border:1px solid var(--border);transition:transform .4s,border-color .4s,box-shadow .4s,background .4s}
+  .benefit:hover{transform:translateY(-6px);border-color:var(--border-2);background:var(--surface-2);box-shadow:0 28px 64px -28px var(--glow-1)}
+  .benefit .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:color-mix(in oklab,var(--accent) 14%,transparent);border:1px solid var(--border);margin-bottom:16px}
+  .benefit h3{margin:0 0 8px;font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .benefit p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  .benefit .src{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .benefit .src a{color:var(--faint);border-bottom:1px dotted var(--border-2);transition:color .2s}
+  .benefit .src a:hover{color:var(--accent)}
+  /* OUTLINE */
+  .outline{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .outline-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:36px;counter-reset:p}
+  .ocard{position:relative;padding:24px;border-radius:18px;background:var(--surface);border:1px solid var(--border);counter-increment:p;transition:transform .3s,border-color .3s,background .3s}
+  .ocard:hover{transform:translateY(-4px);border-color:var(--accent);background:var(--surface-2)}
+  .ocard::before{content:counter(p,decimal-leading-zero);position:absolute;top:18px;right:20px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--faint)}
+  .ocard .ph{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:9px}
+  .ocard h3{margin:0 0 8px;font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .ocard p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  /* CTA */
+  .cta{padding:clamp(40px,6vw,80px) clamp(16px,4vw,40px)}
+  .cta-card{position:relative;overflow:hidden;text-align:center;padding:clamp(34px,5vw,60px) clamp(20px,4vw,48px);border-radius:28px;background:linear-gradient(160deg,var(--surface-2),var(--surface));border:1px solid var(--border);box-shadow:0 40px 90px -50px rgba(0,0,0,.8)}
+  .cta-card::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:70%;height:80%;border-radius:50%;background:radial-gradient(circle,var(--glow-1),transparent 65%);filter:blur(40px);opacity:.5;pointer-events:none}
+  .cta-card h2{position:relative;margin:0 auto;max-width:20ch;font-family:var(--font-display);font-weight:600;font-size:clamp(27px,4vw,46px);line-height:1.08;letter-spacing:-.02em}
+  .cta-card p{position:relative;margin:18px auto 0;max-width:54ch;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:var(--muted)}
+  .cta-card .ctas{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:30px}
+  .cta-card .note{position:relative;margin-top:22px;font-size:13px;color:var(--faint)}
+  .audit-list{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:26px auto 0;max-width:760px;text-align:left}
+  .audit-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:11px;background:var(--surface);border:1px solid var(--border);font-size:13.5px;color:var(--muted)}
+  .audit-item .chk{flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:color-mix(in oklab,var(--accent) 22%,transparent);display:grid;place-items:center;margin-top:1px}
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:clamp(20px,4vw,40px);position:relative;z-index:5}
+  .foot{max-width:1200px;margin:0 auto;padding:34px clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;justify-content:space-between}
+  .foot p{margin:0;font-size:13.5px;line-height:1.55;color:var(--muted);max-width:340px}
+  .foot-cols{display:flex;gap:48px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+  .foot-col{display:flex;flex-direction:column;gap:9px}
+  .foot-col .ti{color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+  .foot-col a:hover{color:var(--text)}
+  .copy{border-top:1px solid var(--border)}
+  .copy-inner{max-width:1200px;margin:0 auto;padding:16px clamp(16px,4vw,40px);font-size:12px;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<div class="bg-aurora" aria-hidden="true">
+  <div class="a"></div>
+  <div class="b"></div>
+  <div class="c"></div>
+</div>
+
+<header>
+  <nav>
+    <a href="/" class="brand">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">N Digital Studio</span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why it matters</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#approach">Approach</a>
+      <a href="/">All services</a>
+    </div>
+    <div>
+      <a href="#audit" class="btn-ghost">Free content audit</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="rise mono">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px var(--glow-1);margin-right:6px;vertical-align:middle"></span>
+        Short-form · Reels · TikTok · Shorts · Posts
+      </div>
+      <h1 class="rise" style="animation-delay:.08s">Content that earns the <span class="grad">scroll-stop</span>, not the skip.</h1>
+      <p class="rise" style="animation-delay:.16s">Your buyers are already on their phones. The question is whether they pause on your post — or swipe past it. I build short-form content that hooks in the first second, holds attention, and turns viewers into customers.</p>
+      <div class="hero-ctas rise" style="animation-delay:.24s">
+        <a href="#audit" class="btn-primary">
+          Get a free content audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#why" class="btn-secondary">
+          <span style="width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--border)"><svg width="9" height="10" viewBox="0 0 10 12" fill="var(--accent)"><path d="M0 0l10 6-10 6z"/></svg></span>
+          Why it matters
+        </a>
+      </div>
+      <div class="pill rise" style="animation-delay:.32s">
+        <span class="dot"></span>
+        Short-form video has the highest ROI of any content format · HubSpot 2024
+      </div>
+    </div>
+
+    <!-- PHONE VISUAL -->
+    <div class="hero-visual">
+      <div class="phone-frame">
+        <div class="phone-conic" aria-hidden="true"></div>
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="reel">
+            <div class="ticker-wrap">
+              <span class="live"></span>
+              <span>LIVE</span>
+              <span class="ticker-num"><span class="roll"><span>2,418</span><span>2,604</span><span>2,891</span><span>3,127</span><span>2,418</span></span></span>
+              <span style="opacity:.8">watching</span>
+            </div>
+
+            <div class="reel-subj"></div>
+
+            <div class="reel-side">
+              <div class="rs-btn rs-heart"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--like)"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div>
+              <div class="rs-num">24.7K</div>
+              <div class="rs-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-5a8 8 0 1 1 16-3z"/></svg></div>
+              <div class="rs-num">1.2K</div>
+              <div class="rs-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></svg></div>
+              <div class="rs-num">Share</div>
+            </div>
+
+            <div class="reel-caption">3 things buyers always ask before they hire us</div>
+            <div class="reel-handle">@yourbrand · 142K views</div>
+
+            <div class="wave"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS — STATS -->
+  <section id="why" class="stats">
+    <div class="sec-head rise">
+      <div class="mono">Why social content</div>
+      <h2 class="display">Short-form video is now the highest-ROI channel buyers are actually paying attention to.</h2>
+      <p>Attention has moved to vertical, sound-on, swipeable feeds. The brands earning it now will own their category for the next five years.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat rise" style="animation-delay:.05s">
+        <div class="n">#1</div>
+        <div class="l">Short-form video is the format with the highest ROI of any marketing trend, reported by marketers globally.</div>
+        <div class="src"><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">HubSpot 2024 report</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.10s">
+        <div class="n">95%</div>
+        <div class="l">Of a video message is retained when watched, compared to just 10% when read in text.</div>
+        <div class="src"><a href="https://www.insivia.com/" target="_blank" rel="noopener">Insivia</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.15s">
+        <div class="n">2.5h</div>
+        <div class="l">Average time per user spent on social media every day, worldwide.</div>
+        <div class="src"><a href="https://datareportal.com/reports/digital-2024-global-overview-report" target="_blank" rel="noopener">DataReportal 2024</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.20s">
+        <div class="n">2.7s</div>
+        <div class="l">Average human attention span on a phone. If your first second doesn't hook, you've already lost them.</div>
+        <div class="src"><a href="https://blog.hubspot.com/marketing/short-attention-span" target="_blank" rel="noopener">Microsoft / HubSpot</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATS -->
+  <section class="formats">
+    <div class="sec-head rise">
+      <div class="mono">What I create</div>
+      <h2 class="display">One idea, every format your buyer lives in.</h2>
+      <p>Filmed once, cut for every platform. No reposted screenshots, no generic stock — content that actually feels native to the feed it lands in.</p>
+    </div>
+    <div class="formats-grid">
+      <div class="fmt rise" style="animation-delay:0s">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
+        <h3>Short-form video</h3>
+        <p>Reels, TikTok and Shorts — vertical, hooked, captioned.</p>
+      </div>
+      <div class="fmt rise" style="animation-delay:.06s">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="7.5" r="1"/></svg></div>
+        <h3>Static &amp; carousel posts</h3>
+        <p>Feed posts that hold up next to bigger brands.</p>
+      </div>
+      <div class="fmt rise" style="animation-delay:.12s">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 6v14h12V6M9 10v6M15 10v6"/></svg></div>
+        <h3>Hooks &amp; scripts</h3>
+        <p>Openers and scripts proven to stop the scroll.</p>
+      </div>
+      <div class="fmt rise" style="animation-delay:.18s">
+        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10"/><path d="M2 17h20l-2 4H4l-2-4z"/></svg></div>
+        <h3>Repurposing engine</h3>
+        <p>One filming day → a month of content across platforms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="benefits">
+    <div class="sec-head rise">
+      <div class="mono">What you actually get</div>
+      <h2 class="display">Attention that compounds — and a brand people remember when they're ready to buy.</h2>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit rise" style="animation-delay:0s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <h3>Hooks that stop the scroll</h3>
+        <p>The first second decides the next thirty. Every video opens with a hook engineered to break the swipe pattern.</p>
+        <div class="src"><a href="https://blog.hubspot.com/marketing/short-attention-span" target="_blank" rel="noopener">Attention span research</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.08s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="5"/><circle cx="17" cy="15" r="4"/><path d="M14 17a5 5 0 0 1-5-3"/></svg></div>
+        <h3>A real audience, not vanity</h3>
+        <p>Followers don't pay invoices — buyers do. The goal is reaching the right people, not the loudest number.</p>
+        <div class="src"><a href="https://www.hubspot.com/marketing-statistics" target="_blank" rel="noopener">HubSpot benchmarks</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.16s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg></div>
+        <h3>Brand recall when it counts</h3>
+        <p>Consistent short-form keeps your name in their head — so when they're ready to buy, you're the one they think of first.</p>
+        <div class="src"><a href="https://www.thinkwithgoogle.com/feature/recall-search-loyalty/" target="_blank" rel="noopener">Think with Google</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.24s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-9"/><path d="M14 6h7v7"/></svg></div>
+        <h3>Compounding distribution</h3>
+        <p>A reel from last month can still drive views today. Unlike ads, content keeps working long after it ships.</p>
+        <div class="src"><a href="https://blog.hubspot.com/marketing/short-form-video-trends" target="_blank" rel="noopener">HubSpot · short-form trends</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH OUTLINE -->
+  <section id="approach" class="outline">
+    <div class="sec-head rise">
+      <div class="mono">The approach</div>
+      <h2 class="display">A simple four-step rhythm — built so content actually ships every week.</h2>
+      <p>Strategy is easy. Shipping is the hard part. Here's the outline at a high level — the details get tailored after the audit.</p>
+    </div>
+    <div class="outline-grid">
+      <div class="ocard rise" style="animation-delay:0s">
+        <div class="ph">Audit</div>
+        <h3>What's working, what isn't</h3>
+        <p>Existing content scored against retention, reach and conversion — then a content angle that fits your brand.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.06s">
+        <div class="ph">Plan</div>
+        <h3>Hooks &amp; calendar</h3>
+        <p>Topics and hooks mapped to your buyer's questions, so every post earns its slot.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.12s">
+        <div class="ph">Produce</div>
+        <h3>Film, edit, ship</h3>
+        <p>Captioned, on-brand, ready for every platform — no chasing, no missing weeks.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.18s">
+        <div class="ph">Refine</div>
+        <h3>Read the data, lean in</h3>
+        <p>Each month: double down on what worked, cut what didn't, hold the rhythm.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="audit" class="cta">
+    <div class="cta-card rise">
+      <div class="mono" style="position:relative">Free content audit</div>
+      <h2>See why your content is being scrolled past — and what would actually stop the swipe.</h2>
+      <p>I'll review your last 30 days of posts against retention, hook strength and conversion. You get a short, practical report with the three changes that would move your numbers fastest — no obligation.</p>
+
+      <div class="audit-list">
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Hook-strength review on your last posts</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Retention &amp; reach benchmark vs your niche</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Three content angles built around your buyer</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> The three fixes that move the needle first</div>
+      </div>
+
+      <div class="ctas">
+        <a href="mailto:hello@ndigitalstudio.com?subject=Free%20Content%20Audit" class="btn-primary">
+          Get a free content audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="/#services" class="btn-secondary">See all services</a>
+      </div>
+      <div class="note">Reply within 2 business days · Based in Slovenia, working across Europe</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div style="max-width:340px">
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px">
+        <span class="brand-mark" style="width:30px;height:30px;border-radius:9px;font-size:16px">N</span>
+        <span class="brand-name" style="font-size:15px">N Digital Studio</span>
+      </div>
+      <p>Websites, local SEO, social content and AI visibility for businesses that want to be found.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="ti">Explore</span>
+        <a href="/#services">All services</a>
+        <a href="ai-visibility">AI visibility</a>
+        <a href="local-seo">Local SEO</a>
+        <a href="website-conversion">Website &amp; conversion</a>
+      </div>
+      <div class="foot-col">
+        <span class="ti">Connect</span>
+        <a href="#audit">Free content audit</a>
+        <span>Email</span>
+        <span>LinkedIn</span>
+      </div>
+    </div>
+  </div>
+  <div class="copy">
+    <div class="copy-inner">© 2026 N Digital Studio · Ljubljana, Slovenia</div>
+  </div>
+</footer>
+
+</body>
+</html>

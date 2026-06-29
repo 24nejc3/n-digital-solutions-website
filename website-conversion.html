@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website &amp; Conversion — N Digital Studio</title>
+<meta name="description" content="Websites that turn visitors into customers. Fast, clear, and built around the single decision a buyer has to make.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060a12; --bg-2:#0a111d;
+    --surface:rgba(120,170,255,0.05); --surface-2:rgba(120,170,255,0.085);
+    --border:rgba(140,185,255,0.12); --border-2:rgba(140,185,255,0.20);
+    --text:#eaf1fc; --muted:#93a6c6; --faint:rgba(234,241,252,0.55);
+    --accent:#2f7bff; --accent-2:#38cfee; --accent-3:#8b7bff; --accent-ink:#04101f;
+    --glow-1:rgba(47,123,255,0.6); --glow-2:rgba(56,200,238,0.45); --halo:rgba(47,123,255,0.18);
+    --good:#34d399;
+    --font-display:'Space Grotesk',serif; --font-body:'Hanken Grotesk',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  @keyframes auroraDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(7%,5%) scale(1.16)}}
+  @keyframes spinSlow{to{transform:rotate(360deg)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes fillBar{from{width:0}to{width:var(--w)}}
+  @keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.6}}
+  @keyframes hoverY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  .rise{animation:rise .7s cubic-bezier(.2,.7,.2,1) backwards}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .display{font-family:var(--font-display);font-weight:600;letter-spacing:-.02em;line-height:1.05}
+  .bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bg-aurora .a{position:absolute;top:-18%;left:-12%;width:62vw;height:62vw;border-radius:50%;background:radial-gradient(circle,var(--glow-1),transparent 62%);filter:blur(40px);opacity:.7;animation:auroraDrift 24s ease-in-out infinite alternate}
+  .bg-aurora .b{position:absolute;bottom:-22%;right:-14%;width:58vw;height:58vw;border-radius:50%;background:radial-gradient(circle,var(--glow-2),transparent 64%);filter:blur(46px);opacity:.5;animation:auroraDrift 30s ease-in-out infinite alternate-reverse}
+  .bg-aurora .c{position:absolute;inset:0;background:radial-gradient(circle at 60% 30%,transparent 30%,var(--bg) 92%)}
+  header{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);background:color-mix(in oklab,var(--bg) 70%,transparent);border-bottom:1px solid var(--border)}
+  nav{max-width:1200px;margin:0 auto;padding:13px clamp(16px,4vw,40px);display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand-mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(140deg,var(--accent),var(--accent-3));color:var(--accent-ink);font-family:var(--font-display);font-weight:700;font-size:18px;box-shadow:0 6px 18px -6px var(--glow-1)}
+  .brand-name{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:-.01em}
+  .nav-links{display:flex;align-items:center;gap:26px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s ease}
+  .nav-links a:hover{color:var(--text)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border-2);font-size:14px;font-weight:600;transition:transform .2s,border-color .2s}
+  .btn-ghost:hover{transform:translateY(-1px);border-color:var(--accent)}
+  .btn-primary{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:9px;padding:15px 23px;border-radius:13px;background:linear-gradient(135deg,var(--accent),var(--accent-3));color:var(--accent-ink);font-weight:700;font-size:15px;box-shadow:0 14px 36px -12px var(--glow-1),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .25s,box-shadow .3s}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 48px -12px var(--glow-1)}
+  .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:15px 20px;border-radius:13px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-weight:600;font-size:15px;transition:transform .25s,background .25s,border-color .25s}
+  .btn-secondary:hover{transform:translateY(-2px);background:var(--surface-2);border-color:var(--border-2)}
+  main{position:relative;z-index:5}
+  section{max-width:1200px;margin:0 auto}
+  /* HERO */
+  .hero{padding:clamp(36px,7vw,86px) clamp(16px,4vw,40px) clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:clamp(26px,4vw,56px);align-items:center}
+  .hero-text{flex:1 1 360px;min-width:290px}
+  .hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(33px,5.3vw,62px);line-height:1.05;letter-spacing:-.02em;margin:18px 0 0;max-width:18ch}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{margin:20px 0 0;max-width:54ch;font-size:clamp(15px,1.5vw,18px);line-height:1.62;color:var(--muted)}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+  .pill{display:inline-flex;align-items:center;gap:9px;margin-top:24px;padding:8px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 10px 1px rgba(52,211,153,.7);animation:blink 2.4s ease-in-out infinite}
+  /* HERO VISUAL — browser conversion mock */
+  .hero-visual{flex:1 1 380px;min-width:290px;display:flex;justify-content:center}
+  .browser-frame{position:relative;width:100%;max-width:540px;aspect-ratio:1/0.9}
+  .browser-conic{position:absolute;inset:-4%;border-radius:38px;background:conic-gradient(from 0deg,var(--glow-1),transparent 28%,var(--glow-2) 58%,transparent 84%,var(--glow-1));filter:blur(48px);opacity:.5;animation:spinSlow 28s linear infinite}
+  .browser{position:absolute;inset:5% 6%;border-radius:18px;background:linear-gradient(165deg,var(--surface-2),var(--surface));border:1px solid var(--border);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);overflow:hidden;box-shadow:0 38px 84px -34px rgba(0,0,0,.82),inset 0 1px 0 rgba(255,255,255,.06)}
+  .chrome{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--border);background:rgba(0,0,0,.18)}
+  .dot-r,.dot-y,.dot-g{width:10px;height:10px;border-radius:50%}
+  .dot-r{background:#ff5f57}.dot-y{background:#febc2e}.dot-g{background:var(--good)}
+  .addr{flex:1;margin-left:8px;height:21px;border-radius:6px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;padding:0 9px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+  .page{padding:18px 20px;display:flex;flex-direction:column;gap:12px;height:calc(100% - 44px)}
+  .h-block{height:14px;border-radius:5px;background:var(--surface-2);width:60%}
+  .h-block.lg{height:18px;width:78%}
+  .p-block{height:8px;border-radius:4px;background:var(--surface);width:100%}
+  .p-block.s{width:82%}
+  .cta-mock{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-3));color:var(--accent-ink);font-weight:700;font-size:13px;box-shadow:0 16px 36px -14px var(--glow-1);position:relative;animation:hoverY 3s ease-in-out infinite}
+  .cta-mock::after{content:'';position:absolute;right:18px;top:50%;width:8px;height:8px;border-radius:50%;background:var(--accent-ink);opacity:.4;animation:pulseDot 1.6s ease-in-out infinite}
+  /* metrics row */
+  .metrics{display:flex;gap:8px;margin-top:2px}
+  .metric{flex:1;padding:9px 11px;border-radius:9px;background:var(--surface);border:1px solid var(--border)}
+  .metric .ml{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .metric .mv{margin-top:2px;font-family:var(--font-display);font-weight:700;font-size:15px;color:var(--text)}
+  .metric .mv .up{color:var(--good);font-size:10px;margin-left:4px}
+  /* SECTION HEADS */
+  .sec-head{max-width:680px}
+  .sec-head h2{margin:14px 0 0;font-family:var(--font-display);font-weight:600;font-size:clamp(26px,3.6vw,42px);line-height:1.1;letter-spacing:-.02em}
+  .sec-head p{margin:18px 0 0;max-width:60ch;color:var(--muted);font-size:clamp(15px,1.4vw,17px);line-height:1.6}
+  /* STATS */
+  .stats{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:36px}
+  .stat{padding:26px;border-radius:18px;background:var(--surface);border:1px solid var(--border);transition:transform .3s,border-color .3s,background .3s}
+  .stat:hover{transform:translateY(-4px);border-color:var(--border-2);background:var(--surface-2)}
+  .stat .n{font-family:var(--font-display);font-weight:700;font-size:clamp(34px,5vw,52px);line-height:1;letter-spacing:-.02em;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.55}
+  .stat .src{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .stat .src a{color:var(--faint);border-bottom:1px dotted var(--border-2);transition:color .2s}
+  .stat .src a:hover{color:var(--accent)}
+  /* PROBLEM vs FIX */
+  .compare{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:36px}
+  @media(max-width:720px){.compare-grid{grid-template-columns:1fr}}
+  .col{padding:28px;border-radius:20px;border:1px solid var(--border);background:var(--surface)}
+  .col.bad{background:rgba(255,90,90,.04);border-color:rgba(255,120,120,.18)}
+  .col.good{background:color-mix(in oklab,var(--accent) 7%,var(--surface));border-color:var(--border-2)}
+  .col h3{margin:0 0 18px;font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+  .col.bad h3 .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:rgba(255,90,90,.12);color:#ff8a8a}
+  .col.good h3 .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:color-mix(in oklab,var(--accent) 20%,transparent);color:var(--accent)}
+  .col ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+  .col li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .col li svg{flex:0 0 auto;margin-top:3px}
+  /* BENEFITS */
+  .benefits{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .benefit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:36px}
+  .benefit{position:relative;overflow:hidden;padding:26px;border-radius:18px;background:var(--surface);border:1px solid var(--border);transition:transform .4s,border-color .4s,box-shadow .4s,background .4s}
+  .benefit:hover{transform:translateY(-6px);border-color:var(--border-2);background:var(--surface-2);box-shadow:0 28px 64px -28px var(--glow-1)}
+  .benefit .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;background:color-mix(in oklab,var(--accent) 14%,transparent);border:1px solid var(--border);margin-bottom:16px}
+  .benefit h3{margin:0 0 8px;font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .benefit p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  .benefit .src{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .benefit .src a{color:var(--faint);border-bottom:1px dotted var(--border-2);transition:color .2s}
+  .benefit .src a:hover{color:var(--accent)}
+  /* OUTLINE */
+  .outline{padding:clamp(36px,5vw,70px) clamp(16px,4vw,40px)}
+  .outline-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:36px;counter-reset:p}
+  .ocard{position:relative;padding:24px;border-radius:18px;background:var(--surface);border:1px solid var(--border);counter-increment:p;transition:transform .3s,border-color .3s,background .3s}
+  .ocard:hover{transform:translateY(-4px);border-color:var(--accent);background:var(--surface-2)}
+  .ocard::before{content:counter(p,decimal-leading-zero);position:absolute;top:18px;right:20px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--faint)}
+  .ocard .ph{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-2);margin-bottom:9px}
+  .ocard h3{margin:0 0 8px;font-family:var(--font-display);font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .ocard p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
+  /* CTA */
+  .cta{padding:clamp(40px,6vw,80px) clamp(16px,4vw,40px)}
+  .cta-card{position:relative;overflow:hidden;text-align:center;padding:clamp(34px,5vw,60px) clamp(20px,4vw,48px);border-radius:28px;background:linear-gradient(160deg,var(--surface-2),var(--surface));border:1px solid var(--border);box-shadow:0 40px 90px -50px rgba(0,0,0,.8)}
+  .cta-card::before{content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:70%;height:80%;border-radius:50%;background:radial-gradient(circle,var(--glow-1),transparent 65%);filter:blur(40px);opacity:.5;pointer-events:none}
+  .cta-card h2{position:relative;margin:0 auto;max-width:20ch;font-family:var(--font-display);font-weight:600;font-size:clamp(27px,4vw,46px);line-height:1.08;letter-spacing:-.02em}
+  .cta-card p{position:relative;margin:18px auto 0;max-width:54ch;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:var(--muted)}
+  .cta-card .ctas{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:30px}
+  .cta-card .note{position:relative;margin-top:22px;font-size:13px;color:var(--faint)}
+  .audit-list{position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:26px auto 0;max-width:760px;text-align:left}
+  .audit-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:11px;background:var(--surface);border:1px solid var(--border);font-size:13.5px;color:var(--muted)}
+  .audit-item .chk{flex:0 0 auto;width:18px;height:18px;border-radius:50%;background:color-mix(in oklab,var(--accent) 22%,transparent);display:grid;place-items:center;margin-top:1px}
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);margin-top:clamp(20px,4vw,40px);position:relative;z-index:5}
+  .foot{max-width:1200px;margin:0 auto;padding:34px clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;justify-content:space-between}
+  .foot p{margin:0;font-size:13.5px;line-height:1.55;color:var(--muted);max-width:340px}
+  .foot-cols{display:flex;gap:48px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+  .foot-col{display:flex;flex-direction:column;gap:9px}
+  .foot-col .ti{color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+  .foot-col a:hover{color:var(--text)}
+  .copy{border-top:1px solid var(--border)}
+  .copy-inner{max-width:1200px;margin:0 auto;padding:16px clamp(16px,4vw,40px);font-size:12px;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<div class="bg-aurora" aria-hidden="true">
+  <div class="a"></div>
+  <div class="b"></div>
+  <div class="c"></div>
+</div>
+
+<header>
+  <nav>
+    <a href="/" class="brand">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">N Digital Studio</span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why it matters</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#approach">Approach</a>
+      <a href="/">All services</a>
+    </div>
+    <div>
+      <a href="#audit" class="btn-ghost">Free site audit</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="rise mono">
+        <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px var(--glow-1);margin-right:6px;vertical-align:middle"></span>
+        Websites · Landing pages · Conversion
+      </div>
+      <h1 class="rise" style="animation-delay:.08s">A website is only worth what it <span class="grad">converts</span>.</h1>
+      <p class="rise" style="animation-delay:.16s">Traffic without conversion is just bandwidth. I build clear, fast sites that take the visitor by the hand and lead them to one decision — book, buy, or call — without friction.</p>
+      <div class="hero-ctas rise" style="animation-delay:.24s">
+        <a href="#audit" class="btn-primary">
+          Get a free conversion audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#why" class="btn-secondary">
+          <span style="width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--border)"><svg width="9" height="10" viewBox="0 0 10 12" fill="var(--accent)"><path d="M0 0l10 6-10 6z"/></svg></span>
+          Why it matters
+        </a>
+      </div>
+      <div class="pill rise" style="animation-delay:.32s">
+        <span class="dot"></span>
+        Average B2B site converts at 2.23% — top performers convert 11%+ · WordStream
+      </div>
+    </div>
+
+    <!-- BROWSER MOCK -->
+    <div class="hero-visual">
+      <div class="browser-frame">
+        <div class="browser-conic" aria-hidden="true"></div>
+        <div class="browser">
+          <div class="chrome">
+            <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+            <span class="addr">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round" style="margin-right:6px"><path d="M12 11V8a4 4 0 1 1 8 0v3"/><rect x="6" y="11" width="14" height="9" rx="2"/></svg>
+              yourbusiness.com
+            </span>
+          </div>
+          <div class="page">
+            <div class="h-block lg"></div>
+            <div class="p-block"></div>
+            <div class="p-block s"></div>
+            <div class="metrics">
+              <div class="metric"><div class="ml">Conv. rate</div><div class="mv">4.8%<span class="up">↑ 2.1×</span></div></div>
+              <div class="metric"><div class="ml">Load</div><div class="mv">0.9s<span class="up">↑ fast</span></div></div>
+              <div class="metric"><div class="ml">Bounce</div><div class="mv">28%<span class="up">↓ 40%</span></div></div>
+            </div>
+            <div class="cta-mock">
+              <span>Book a free call</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS — STATS -->
+  <section id="why" class="stats">
+    <div class="sec-head rise">
+      <div class="mono">Why conversion</div>
+      <h2 class="display">Most sites lose the visitor before they ever see what's on offer.</h2>
+      <p>Speed, clarity, and a single clear next step are still the levers that move the number. The data has been brutally consistent on this for years.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat rise" style="animation-delay:.05s">
+        <div class="n">53%</div>
+        <div class="l">Of mobile visitors abandon a page that takes longer than 3 seconds to load.</div>
+        <div class="src"><a href="https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/mobile-page-speed-new-industry-benchmarks/" target="_blank" rel="noopener">Think with Google</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.10s">
+        <div class="n">+32%</div>
+        <div class="l">Increase in bounce rate when page load goes from 1 to 3 seconds.</div>
+        <div class="src"><a href="https://www.thinkwithgoogle.com/marketing-strategies/app-and-mobile/page-load-time-statistics/" target="_blank" rel="noopener">Google · Page speed</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.15s">
+        <div class="n">2.35%</div>
+        <div class="l">Average website conversion rate. Top performers do 5–10× more from the same traffic.</div>
+        <div class="src"><a href="https://www.wordstream.com/blog/ws/2014/03/17/what-is-a-good-conversion-rate" target="_blank" rel="noopener">WordStream</a></div>
+      </div>
+      <div class="stat rise" style="animation-delay:.20s">
+        <div class="n">75%</div>
+        <div class="l">Of users judge a company's credibility purely on its website design.</div>
+        <div class="src"><a href="https://www.tandfonline.com/doi/abs/10.1080/01449290500330448" target="_blank" rel="noopener">Stanford / B&amp;IT</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM vs FIX -->
+  <section class="compare">
+    <div class="sec-head rise">
+      <div class="mono">Where money leaks</div>
+      <h2 class="display">Why a "nice looking" site still doesn't convert.</h2>
+      <p>Most underperforming sites aren't ugly — they're confused. The visitor doesn't know who it's for, what it does, or what to do next within the first five seconds.</p>
+    </div>
+    <div class="compare-grid">
+      <div class="col bad rise">
+        <h3><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>What kills the conversion</h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a8a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>Vague headline that doesn't say who it's for</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a8a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>Slow load, layout shift, broken on mobile</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a8a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>Five different CTAs competing for attention</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a8a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>No proof — no reviews, results or named clients</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff8a8a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg>Generic stock photos, zero personality</li>
+        </ul>
+      </div>
+      <div class="col good rise" style="animation-delay:.08s">
+        <h3><span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span>What I build instead</h3>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg>A headline a 12-year-old understands in 3 seconds</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg>Sub-1s loads, mobile-first, zero layout jank</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg>One primary CTA, repeated where it counts</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg>Proof placed exactly where doubt appears</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg>A design that looks like you, not a template</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefits" class="benefits">
+    <div class="sec-head rise">
+      <div class="mono">What you actually get</div>
+      <h2 class="display">A site that does the selling for you — not a brochure that needs explaining.</h2>
+    </div>
+    <div class="benefit-grid">
+      <div class="benefit rise" style="animation-delay:0s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <h3>Speed that holds attention</h3>
+        <p>Sub-second loads, optimized images, no bloat. Every 100ms of speed matters — Amazon famously found 100ms of latency cost them 1% of sales.</p>
+        <div class="src"><a href="https://www.gigaspaces.com/blog/amazon-found-every-100ms-of-latency-cost-them-1-in-sales" target="_blank" rel="noopener">GigaSpaces</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.08s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Clarity in under 5 seconds</h3>
+        <p>Users decide whether to stay or leave in seconds. The hero, the headline and the next click are tuned so the answer is "stay".</p>
+        <div class="src"><a href="https://www.nngroup.com/articles/how-long-do-users-stay-on-web-pages/" target="_blank" rel="noopener">Nielsen Norman Group</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.16s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-9"/><path d="M14 6h7v7"/></svg></div>
+        <h3>Conversion-led structure</h3>
+        <p>Every section earns its place by moving the visitor closer to the CTA. Top sites convert 3–5× the average — structure is most of the gap.</p>
+        <div class="src"><a href="https://www.wordstream.com/blog/ws/2014/03/17/what-is-a-good-conversion-rate" target="_blank" rel="noopener">WordStream benchmarks</a></div>
+      </div>
+      <div class="benefit rise" style="animation-delay:.24s">
+        <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg></div>
+        <h3>Credibility on first glance</h3>
+        <p>75% of users judge a business's credibility on its website alone. Design isn't decoration — it's the trust signal that decides the click.</p>
+        <div class="src"><a href="https://www.tandfonline.com/doi/abs/10.1080/01449290500330448" target="_blank" rel="noopener">Stanford / B&amp;IT study</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH OUTLINE -->
+  <section id="approach" class="outline">
+    <div class="sec-head rise">
+      <div class="mono">The approach</div>
+      <h2 class="display">A focused four-step build — designed around the decision your visitor has to make.</h2>
+      <p>I keep the process tight and visible. Here's the outline at a high level — the details get tailored after the audit.</p>
+    </div>
+    <div class="outline-grid">
+      <div class="ocard rise" style="animation-delay:0s">
+        <div class="ph">Audit</div>
+        <h3>Where the leaks are</h3>
+        <p>Speed, clarity, friction and trust gaps — measured against what your buyer actually decides on.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.06s">
+        <div class="ph">Message</div>
+        <h3>The 5-second test</h3>
+        <p>Headline, value, proof and CTA pinned down before a single pixel gets designed.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.12s">
+        <div class="ph">Build</div>
+        <h3>Fast, clean, conversion-led</h3>
+        <p>A site engineered for speed, clarity and one decisive next step on every screen.</p>
+      </div>
+      <div class="ocard rise" style="animation-delay:.18s">
+        <div class="ph">Refine</div>
+        <h3>Measure &amp; tune</h3>
+        <p>Real analytics on what visitors actually do, then targeted tweaks to lift the number that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="audit" class="cta">
+    <div class="cta-card rise">
+      <div class="mono" style="position:relative">Free conversion audit</div>
+      <h2>See exactly why visitors are leaving — and what to fix first.</h2>
+      <p>I'll review your site's speed, clarity, and conversion path against what buyers in your market expect. You get a short, practical report with the three highest-impact fixes — no obligation.</p>
+
+      <div class="audit-list">
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Speed &amp; mobile performance score</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> 5-second clarity test on your hero</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Friction map of your conversion path</div>
+        <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Three fixes that move the needle first</div>
+      </div>
+
+      <div class="ctas">
+        <a href="mailto:hello@ndigitalstudio.com?subject=Free%20Conversion%20Audit" class="btn-primary">
+          Get a free conversion audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="/#services" class="btn-secondary">See all services</a>
+      </div>
+      <div class="note">Reply within 2 business days · Based in Slovenia, working across Europe</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div style="max-width:340px">
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:12px">
+        <span class="brand-mark" style="width:30px;height:30px;border-radius:9px;font-size:16px">N</span>
+        <span class="brand-name" style="font-size:15px">N Digital Studio</span>
+      </div>
+      <p>Websites, local SEO and AI visibility for businesses that want to be found.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <span class="ti">Explore</span>
+        <a href="/#services">All services</a>
+        <a href="ai-visibility">AI visibility</a>
+        <a href="local-seo">Local SEO</a>
+      </div>
+      <div class="foot-col">
+        <span class="ti">Connect</span>
+        <a href="#audit">Free conversion audit</a>
+        <span>Email</span>
+        <span>LinkedIn</span>
+      </div>
+    </div>
+  </div>
+  <div class="copy">
+    <div class="copy-inner">© 2026 N Digital Studio · Ljubljana, Slovenia</div>
+  </div>
+</footer>
+
+</body>
+</html>
