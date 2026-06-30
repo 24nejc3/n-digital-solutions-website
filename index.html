@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
+html,body{margin:0;padding:0;scroll-behavior:smooth;}
 body{background:#07080c;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;}
@@ -33,6 +33,17 @@ button{font-family:inherit;}
 @keyframes flowDown{0%{top:-32%;}100%{top:132%;}}
 @keyframes toast{0%{opacity:0;transform:translateY(16px) scale(.96);}6%{opacity:1;transform:translateY(0) scale(1);}46%{opacity:1;transform:translateY(0) scale(1);}56%{opacity:0;transform:translateY(-20px) scale(.98);}100%{opacity:0;transform:translateY(-20px) scale(.98);}}
 @keyframes caret{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* Contact Form styles */
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--halo), 0 4px 12px -4px var(--glow-1) !important;
+  background: var(--surface-2) !important;
+}
+.form-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 48px -12px var(--glow-1);
+}
 </style>
 </helmet>
 <div>
@@ -312,10 +323,41 @@ Available — 2 project slots for Q3 2026
 <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent,#7e8cff);margin-bottom:16px;">Free visibility audit</div>
 <h2 style="margin:0 auto;max-width:18ch;font-family:var(--font-display,'Space Grotesk'),serif;font-style:var(--display-style,normal);font-weight:var(--display-weight,600);font-size:clamp(27px,4vw,46px);line-height:1.08;letter-spacing:var(--display-spacing,-.02em);">Let’s make your business easy to find — and easy to choose.</h2>
 <p style="margin:18px auto 0;max-width:52ch;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:var(--muted,#98a1b4);">Tell me about your business and I’ll send back a short, practical audit of your website, Google Business Profile, and local search visibility — no obligation.</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:30px;">
-<a href="#top" style="display:inline-flex;align-items:center;gap:9px;padding:15px 24px;border-radius:13px;background:linear-gradient(135deg,var(--accent,#7e8cff),var(--accent-2,#b98cff));color:var(--accent-ink,#0a0b16);font-weight:700;font-size:15px;box-shadow:0 14px 36px -12px var(--glow-1,rgba(126,140,255,.55));transition:transform .25s ease,box-shadow .3s ease;" style-hover="transform:translateY(-2px);box-shadow:0 22px 48px -12px var(--glow-1,rgba(126,140,255,.55));">Get a free visibility audit <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></a>
-<a href="#services" style="display:inline-flex;align-items:center;gap:9px;padding:15px 22px;border-radius:13px;background:var(--surface,rgba(255,255,255,.035));border:1px solid var(--border,rgba(255,255,255,.08));font-weight:600;font-size:15px;transition:transform .25s ease,border-color .25s ease;" style-hover="transform:translateY(-2px);border-color:var(--border-2,rgba(255,255,255,.16));">See how I work</a>
-</div>
+<form onSubmit="{{ handleFormSubmit }}" class="contact-form" style="margin-top: 32px; display: flex; flex-direction: column; gap: 16px; max-width: 520px; margin-left: auto; margin-right: auto; text-align: left; position: relative; z-index: 10;">
+  <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+      <label style="font-size: 11px; font-weight: 600; color: var(--muted,#98a1b4); font-family: 'JetBrains Mono', monospace; letter-spacing: .05em; text-transform: uppercase;">Business Name</label>
+      <input type="text" name="businessName" required placeholder="e.g. My Local Cafe" style="padding: 12px 16px; border-radius: 10px; background: var(--surface,rgba(255,255,255,.035)); border: 1px solid var(--border,rgba(255,255,255,.08)); color: var(--text,#eef1f7); font-family: inherit; font-size: 14.5px; outline: none; transition: border-color .25s, box-shadow .25s;"/>
+    </div>
+    <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+      <label style="font-size: 11px; font-weight: 600; color: var(--muted,#98a1b4); font-family: 'JetBrains Mono', monospace; letter-spacing: .05em; text-transform: uppercase;">Email Address</label>
+      <input type="email" name="email" required placeholder="name@company.com" style="padding: 12px 16px; border-radius: 10px; background: var(--surface,rgba(255,255,255,.035)); border: 1px solid var(--border,rgba(255,255,255,.08)); color: var(--text,#eef1f7); font-family: inherit; font-size: 14.5px; outline: none; transition: border-color .25s, box-shadow .25s;"/>
+    </div>
+  </div>
+  <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+    <label style="font-size: 11px; font-weight: 600; color: var(--muted,#98a1b4); font-family: 'JetBrains Mono', monospace; letter-spacing: .05em; text-transform: uppercase;">Website URL</label>
+    <input type="url" name="website" required placeholder="https://mywebsite.com" style="padding: 12px 16px; border-radius: 10px; background: var(--surface,rgba(255,255,255,.035)); border: 1px solid var(--border,rgba(255,255,255,.08)); color: var(--text,#eef1f7); font-family: inherit; font-size: 14.5px; outline: none; transition: border-color .25s, box-shadow .25s;"/>
+  </div>
+  <div class="form-group" style="display: flex; flex-direction: column; gap: 8px;">
+    <label style="font-size: 11px; font-weight: 600; color: var(--muted,#98a1b4); font-family: 'JetBrains Mono', monospace; letter-spacing: .05em; text-transform: uppercase;">Message / Goals</label>
+    <textarea name="message" rows="3" placeholder="Tell me about your business and visibility goals..." style="padding: 12px 16px; border-radius: 10px; background: var(--surface,rgba(255,255,255,.035)); border: 1px solid var(--border,rgba(255,255,255,.08)); color: var(--text,#eef1f7); font-family: inherit; font-size: 14.5px; outline: none; resize: vertical; transition: border-color .25s, box-shadow .25s;"></textarea>
+  </div>
+  
+  <button type="submit" disabled="{{ formDisabled }}" class="form-submit-btn" style="appearance: none; border: none; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 23px; border-radius: 13px; background: linear-gradient(135deg,var(--accent,#7e8cff),var(--accent-2,#b98cff)); color: var(--accent-ink,#0a0b16); font-weight: 700; font-size: 15px; box-shadow: 0 14px 36px -12px var(--glow-1,rgba(126,140,255,.55)),inset 0 1px 0 rgba(255,255,255,.28); transition: transform .25s, box-shadow .3s, opacity .25s; width: 100%; margin-top: 10px;">
+    {{ submitButtonText }}
+  </button>
+  
+  <sc-if value="{{ formSuccess }}" hint-placeholder-val="{{ false }}">
+    <div class="form-success" style="padding: 16px; border-radius: 12px; font-size: 14.5px; line-height: 1.5; margin-top: 16px; text-align: center; background: color-mix(in oklab, #34d399 12%, var(--surface,rgba(255,255,255,.035))); border: 1px solid #34d399; color: var(--text,#eef1f7);">
+      Audit request sent! I will review your details and reply within 2 business days.
+    </div>
+  </sc-if>
+  <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+    <div class="form-error" style="padding: 16px; border-radius: 12px; font-size: 14.5px; line-height: 1.5; margin-top: 16px; text-align: center; background: color-mix(in oklab, #ef4444 12%, var(--surface,rgba(255,255,255,.035))); border: 1px solid #ef4444; color: var(--text,#eef1f7);">
+      {{ formErrorMessage }}
+    </div>
+  </sc-if>
+</form>
 <div style="margin-top:22px;font-size:13px;color:var(--faint,rgba(238,241,247,.55));">Reply within 2 business days · Based in Slovenia, working across Europe</div>
 </div>
 </div>
@@ -362,7 +404,7 @@ Available — 2 project slots for Q3 2026
   &quot;showAvailability&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Content&quot;}
 }">
 class Component extends DCLogic {
-  state = { theme: this.props.variation || 'nocturne', prefersReduce: false };
+  state = { theme: this.props.variation || 'nocturne', prefersReduce: false, formStatus: 'idle', formErrorMsg: '' };
 
   componentDidMount() {
     try {
@@ -515,13 +557,56 @@ class Component extends DCLogic {
     };
   }
 
+  handleFormSubmit = async (e) => {
+    e.preventDefault();
+    this.setState({ formStatus: 'sending', formErrorMsg: '' });
+    const form = e.target;
+    const data = {
+      email: form.email.value,
+      businessName: form.businessName.value,
+      website: form.website.value,
+      message: form.message.value,
+      _subject: 'New Visibility Audit Request (Homepage)'
+    };
+    try {
+      const response = await fetch('https://formspree.io/f/xlgywjao', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        this.setState({ formStatus: 'success' });
+        form.reset();
+      } else {
+        const resData = await response.json();
+        const err = resData.errors ? resData.errors.map(el => el.message).join(', ') : 'Failed to send request.';
+        this.setState({ formStatus: 'error', formErrorMsg: err });
+      }
+    } catch (err) {
+      this.setState({ formStatus: 'error', formErrorMsg: 'Network error. Please check your connection and try again.' });
+    }
+  };
+
   renderVals() {
     const theme = this.state.theme;
     const reduce = !!this.props.reduceMotion || this.state.prefersReduce;
     const gi = Math.max(0, Math.min(100, this.props.glowIntensity == null ? 70 : this.props.glowIntensity)) / 100;
     const showAvail = this.props.showAvailability == null ? true : this.props.showAvailability;
-    const key = theme + '|' + reduce + '|' + gi + '|' + showAvail;
-    if (!this._cache[key]) this._cache[key] = this.build(theme, reduce, gi, showAvail);
+    const key = theme + '|' + reduce + '|' + gi + '|' + showAvail + '|' + this.state.formStatus + '|' + this.state.formErrorMsg;
+    if (!this._cache[key]) {
+      const base = this.build(theme, reduce, gi, showAvail);
+      this._cache[key] = Object.assign({}, base, {
+        formDisabled: this.state.formStatus === 'sending' || this.state.formStatus === 'success',
+        formSuccess: this.state.formStatus === 'success',
+        formError: this.state.formStatus === 'error',
+        formErrorMessage: this.state.formErrorMsg || 'Something went wrong. Please try again.',
+        submitButtonText: this.state.formStatus === 'sending' ? 'Sending request...' : this.state.formStatus === 'success' ? 'Request Sent!' : 'Get a free visibility audit',
+        handleFormSubmit: this.handleFormSubmit
+      });
+    }
     return this._cache[key];
   }
 }

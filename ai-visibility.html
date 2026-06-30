@@ -19,7 +19,7 @@
     --font-display:'Space Grotesk',serif; --font-body:'Hanken Grotesk',system-ui,sans-serif;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
+  html,body{margin:0;padding:0;scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   button{font-family:inherit}
@@ -168,6 +168,105 @@
   .foot-col a:hover{color:var(--text)}
   .copy{border-top:1px solid var(--border)}
   .copy-inner{max-width:1200px;margin:0 auto;padding:16px clamp(16px,4vw,40px);font-size:12px;color:var(--faint)}
+  .contact-form {
+    margin-top: 32px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    position: relative;
+    z-index: 10;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 580px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14.5px;
+    outline: none;
+    transition: border-color .25s, box-shadow .25s, background-color .25s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--halo), 0 4px 12px -4px var(--glow-1) !important;
+    background: var(--surface-2) !important;
+  }
+  .form-submit-btn {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 15px 23px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: 15px;
+    box-shadow: 0 14px 36px -12px var(--glow-1), inset 0 1px 0 rgba(255,255,255,.28);
+    transition: transform .25s, box-shadow .3s, opacity .25s;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .form-submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 48px -12px var(--glow-1);
+  }
+  .form-submit-btn:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+  .form-success, .form-error {
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .form-success {
+    background: color-mix(in oklab, #34d399 12%, var(--surface));
+    border: 1px solid #34d399;
+    color: var(--text);
+  }
+  .form-error {
+    background: color-mix(in oklab, #ef4444 12%, var(--surface));
+    border: 1px solid #ef4444;
+    color: var(--text);
+  }
 </style>
 </head>
 <body>
@@ -460,13 +559,33 @@
         <div class="audit-item"><span class="chk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10.5"/></svg></span> Three pages I'd build first, ranked</div>
       </div>
 
-      <div class="ctas">
-        <a href="mailto:hello@ndigitalstudio.com?subject=Free%20AI%20Visibility%20Audit" class="btn-primary">
-          Get my free AI audit
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a href="/#services" class="btn-secondary">See all services</a>
-      </div>
+      <form id="contactForm" class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name</label>
+            <input type="text" name="businessName" required placeholder="e.g. My Business">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" required placeholder="name@company.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Website URL</label>
+          <input type="url" name="website" required placeholder="https://mywebsite.com">
+        </div>
+        <div class="form-group">
+          <label>Target Queries / Keywords</label>
+          <textarea name="message" rows="3" required placeholder="What search terms do you want AI to recommend you for? (e.g. 'best cafe near me')"></textarea>
+        </div>
+        
+        <button type="submit" class="form-submit-btn">Get my free AI audit</button>
+        
+        <div id="formSuccess" class="form-success" style="display: none;">
+          Audit request sent! I will review your details and reply within 2 business days.
+        </div>
+        <div id="formError" class="form-error" style="display: none;"></div>
+      </form>
       <div class="note">Reply within 2 business days · Based in Slovenia, working across Europe</div>
     </div>
   </section>
@@ -512,5 +631,57 @@
   </div>
 </footer>
 
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = this;
+    const btn = form.querySelector('.form-submit-btn');
+    const successDiv = document.getElementById('formSuccess');
+    const errorDiv = document.getElementById('formError');
+    
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Sending request...';
+    successDiv.style.display = 'none';
+    errorDiv.style.display = 'none';
+    
+    const data = {
+      email: form.email.value,
+      businessName: form.businessName.value,
+      website: form.website.value,
+      message: form.message.value,
+      _subject: 'New AI Visibility Audit Request'
+    };
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xlgywjao', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        successDiv.style.display = 'block';
+        form.reset();
+        btn.textContent = 'Request Sent!';
+      } else {
+        const resData = await response.json();
+        const err = resData.errors ? resData.errors.map(el => el.message).join(', ') : 'Failed to send request.';
+        errorDiv.textContent = err;
+        errorDiv.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    } catch (err) {
+      errorDiv.textContent = 'Network error. Please check your connection and try again.';
+      errorDiv.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+</script>
 </body>
 </html>
