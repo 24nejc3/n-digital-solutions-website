@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" width="640" height="240">
+  <defs>
+    
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38cfee"></stop>
+      <stop offset="100%" stop-color="#7e8cff"></stop>
+    </linearGradient>
+    <radialGradient id="aura" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#38cfee" stop-opacity="0.18"></stop>
+      <stop offset="100%" stop-color="#38cfee" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="240" fill="#07080c"></rect>
+  <g transform="translate(40,40)">
+    <circle cx="80" cy="80" r="110" fill="url(#aura)"></circle>
+    <circle cx="80" cy="80" r="68" fill="none" stroke="url(#ring)" stroke-width="1.25"></circle>
+    <circle cx="80" cy="80" r="68" fill="none" stroke="#38cfee" stroke-opacity="0.4" stroke-width="0.6"></circle>
+    <text x="82" y="124" text-anchor="middle" class="glyph" style="font-size:150px;">N</text>
+  </g>
+  <text x="230" y="118" class="word" style="font-size:56px;">N Digital</text>
+  <text x="232" y="150" class="tag" style="font-size:13px; text-transform:uppercase;">— STUDIO —</text>
+</svg>

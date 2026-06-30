@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" width="520" height="200">
+  <defs>
+    
+  </defs>
+  <rect width="520" height="200" fill="#07080c"></rect>
+  <g transform="translate(40,40)">
+    <rect x="0" y="0" width="120" height="120" rx="28" ry="28" fill="none" stroke="#38cfee" stroke-opacity="0.7" stroke-width="1.5"></rect>
+    <rect x="0" y="0" width="120" height="120" rx="28" ry="28" fill="none" stroke="#38cfee" stroke-opacity="0.25" stroke-width="6"></rect>
+    <text x="60" y="98" text-anchor="middle" class="word" style="font-size:104px;">N</text>
+  </g>
+  <text x="200" y="100" class="word" style="font-size:48px;">N Digital</text>
+  <text x="200" y="128" class="tag" style="font-size:12px; text-transform:uppercase;">— STUDIO —</text>
+</svg>
